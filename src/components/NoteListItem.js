@@ -1,17 +1,30 @@
-﻿import React from "react";
+﻿import React, { useState } from "react";
 import PropTypes from "prop-types";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import ReactMarkdown from 'react-markdown';
 
+dayjs.extend(relativeTime);
+const oneWeekAgo = Date.now() - (168 * 60 * 60 * 1000);
 const MAX_LENGTH = 200;
 
 export default function NoteListItem(props) {
-    const { dateTimeText, id, onClick, text } = props;
+    const { createdAt, id, onClick, text } = props;
 
     const handleItemClick = (event) => {
         event.preventDefault();
-
         if (onClick) {
+        onClick(id);
+        }
+    };
 
-            onClick(id);
+    const formatDate = (date) => {
+        if (date >= oneWeekAgo) {
+            dayjs(date).format("h:m a on M/D/YYYY");
+            return dayjs(date).format("h:m a on M/D/YYYY");
+        }
+        else {
+            return dayjs(date).fromNow();
         }
     };
 
@@ -19,11 +32,11 @@ export default function NoteListItem(props) {
         <div onClick={handleItemClick}>
         <div className="noteListItem">
             <div>
-                {text.length > MAX_LENGTH ? `${text.substring(0, MAX_LENGTH)}...` : text}
+                    <ReactMarkdown source={ text.length > MAX_LENGTH ? `${text.substring(0, MAX_LENGTH)}...` : text } />
             </div>
-            <div>
-                {dateTimeText}
-            </div>
+                <div>
+                    <p> {formatDate(createdAt)} </p>
+                </div>
             </div>
         </div>
     );
@@ -32,7 +45,7 @@ export default function NoteListItem(props) {
 NoteListItem.propTypes = {
     id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
-    dateTimeText: PropTypes.string.isRequired,
+    createdAt: PropTypes.instanceOf(Date).isRequired,
     onClick: PropTypes.func
 };
 
