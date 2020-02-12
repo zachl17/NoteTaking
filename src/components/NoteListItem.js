@@ -5,8 +5,18 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import ReactMarkdown from 'react-markdown';
 
 dayjs.extend(relativeTime);
-const oneWeekAgo = Date.now() - (168 * 60 * 60 * 1000);
 const MAX_LENGTH = 200;
+
+const formatDate = (date) => {
+    const oneWeekAgo = Date.now() - (168 * 60 * 60 * 1000);
+    if (date >= oneWeekAgo) {
+        return dayjs(date).fromNow();
+    }
+    else {
+        dayjs(date).format("h:m a on M/D/YYYY");
+        return dayjs(date).format("h:m a on M/D/YYYY");
+    }
+};
 
 export default function NoteListItem(props) {
     const { createdAt, id, onClick, text } = props;
@@ -15,16 +25,6 @@ export default function NoteListItem(props) {
         event.preventDefault();
         if (onClick) {
         onClick(id);
-        }
-    };
-
-    const formatDate = (date) => {
-        if (date >= oneWeekAgo) {
-            dayjs(date).format("h:m a on M/D/YYYY");
-            return dayjs(date).format("h:m a on M/D/YYYY");
-        }
-        else {
-            return dayjs(date).fromNow();
         }
     };
 

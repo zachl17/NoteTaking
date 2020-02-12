@@ -15,12 +15,14 @@ export default function NoteEditPage(props) {
             <h1>Note Edit</h1>
             <textarea value={value} onChange={handleChange} />
             <button type="button" onClick={() => onSave(value)}>Save</button>
-            <button type="button" onClick={() => onDelete(value)}>Delete</button>
-            <button type="button" onClick={() => onCancel(value)}>Cancel</button>
+            <button type="button" onClick={() => onDelete()}>Delete</button>
+            <button type="button" onClick={() => onCancel()}>Cancel</button>
         </div>
     );
 }
 NoteEditPage.propTypes = {
+    onCancel: PropTypes.func,
+    onDelete: PropTypes.func,
     onSave: PropTypes.func,
     text: PropTypes.string.isRequired
 };

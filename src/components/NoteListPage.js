@@ -47,16 +47,8 @@ export default function NoteListPage() {
     };
 
     const handleSelectedNoteDelete = () => {
-        const newNotes = notes.map((note) => {
-            if (note.id === selectedNoteId) {
-                return {
-                    ...note,
-                   text: ""
-                };
-            }
-            return note;
-        });
-        setNotes(newNotes);
+        const updatedNotes = notes.filter((note) => note.id !== selectedNoteId);
+        setNotes(updatedNotes);
         setSelectedNoteId(null);
     };
 
