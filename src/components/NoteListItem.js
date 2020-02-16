@@ -1,21 +1,15 @@
 ﻿import React, { useState } from "react";
 import PropTypes from "prop-types";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import ReactMarkdown from 'react-markdown';
+import formatDate from "../util/formatDate";
 
-dayjs.extend(relativeTime);
 const MAX_LENGTH = 200;
 
-const formatDate = (date) => {
-    const oneWeekAgo = Date.now() - (168 * 60 * 60 * 1000);
-    if (date >= oneWeekAgo) {
-        return dayjs(date).fromNow();
+const checkText = (text) => {
+    if (text.trim() == "" || text.trim().length == 0) {
+        text = "No note text";
     }
-    else {
-        dayjs(date).format("h:m a on M/D/YYYY");
-        return dayjs(date).format("h:m a on M/D/YYYY");
-    }
+    return text;
 };
 
 export default function NoteListItem(props) {
@@ -32,7 +26,7 @@ export default function NoteListItem(props) {
         <div onClick={handleItemClick}>
         <div className="noteListItem">
             <div>
-                    <ReactMarkdown source={ text.length > MAX_LENGTH ? `${text.substring(0, MAX_LENGTH)}...` : text } />
+                    <ReactMarkdown source={text.length > MAX_LENGTH ? `${text.substring(0, MAX_LENGTH)}...` : checkText(text)} />
             </div>
                 <div>
                     <p> {formatDate(createdAt)} </p>
