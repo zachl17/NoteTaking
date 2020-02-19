@@ -6,7 +6,7 @@ import formatDate from "../util/formatDate";
 const MAX_LENGTH = 200;
 
 const checkText = (text) => {
-    if (text.trim() == "" || text.trim().length == 0) {
+    if (text.trim() == "") {
         text = "No note text";
     }
     return text;
