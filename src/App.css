@@ -1,15 +1,13 @@
-.App {
-  text-align: center;
+:root {
+  --ion-background-color: #778899;
+  --ion-text-color: #111111; 
 }
-
-.noteListItem{
-    background-color : #dddddd;
-    padding: 10px;
-    cursor: pointer;
+ion-list{
+    --ion-background-color: #e6e6e6;
+    --ion-text-color: #999999;
+    --ion-text-font: 50px;
 }
-.noteListItem:nth-of-type(odd){
-    background-color: #eeeeee;
-}
-.noteListItem:hover{
-    background-color: #cccccc;
+ion-header{
+    --ion-background-color: #e6e6e6;
+    --ion-text-color: #2F4F4F;  
 }
