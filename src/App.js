@@ -6,7 +6,7 @@ import NoteEditPageController from './components/NoteEditPageController.js';
 import NoteListPage from './components/NoteListPage.js';
 import { NotesProvider } from './hooks/useNotes';
 import './ionicStyles';
-import styles from "./App.css";
+import "./App.css";
 
 
 function App() {

@@ -20,11 +20,11 @@ export default function NoteListPage() {
     const history = useHistory();
     
     const handleListItemClick = (id) => {
-        history.push("/notes/edit/${id}");
+        history.push(`/notes/edit/${id}`);
     };
 const handleNewNoteClick = () => {
     const { id } = createNote();
-    history.push('/notes/edit/${id}');
+    history.push(`/notes/edit/${id}`);
 };
     return (
         <IonPage>
