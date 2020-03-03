@@ -66,6 +66,16 @@ export default function useNotes() {
                 return note;
             });
             saveNotes(newNotes);
+        },
+        archiveNote(id, newText){
+            var isArchived = false;
+            const newNotes = notes.map((note) => {
+                if (note.id === id) {
+                    isArchived = true;
+                }
+                return note;
+            });
+            saveNotes(newNotes);
         }
     };
 }

@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import {
     IonPage,
@@ -11,14 +12,16 @@ import {
     IonIcon,
     IonActionSheet
 } from '@ionic/react';
-import { chevronBack, ellipsisHorizontal, trash, close } from 'ionicons/icons';
+import { chevronBack, ellipsisHorizontal, trash, close, archive } from 'ionicons/icons';
 import styles from "./NoteEditPage.module.css";
 
 export default function NoteEditPage(props) {
     const { onSave, text } = props;
     const { onDelete } = props;
+    const { onArchive } = props;
     const [value, setValue] = useState(text);
     const [showActions, setShowActions] = useState(false);
+    const { t } = useTranslation();
     const handleChange = (event) => {
         setValue(event.target.value);
     }
@@ -46,18 +49,22 @@ export default function NoteEditPage(props) {
                     onDidDismiss={() => setShowActions(false)}
                     buttons={[
                         {
-                            text: "Delete",
+                            text:t("deleteText"),
                             role: "destructive",
                             icon: trash,
                             handler: onDelete
                         },
                         {
-                            text: "Cancel",
+                            text: t("cancelText"),
                             role: "cancel",
                             icon: close,
                             handler: () => setShowActions(false)
+                        },
+                        {
+                            text: t("archiveText"),
+                            icon: archive,
+                            handler: onArchive
                         }
-
                     ]}
                 />
             </IonContent>
@@ -65,6 +72,7 @@ export default function NoteEditPage(props) {
         );
 }
 NoteEditPage.propTypes = {
+    onArchive: PropTypes.func,
     onDelete: PropTypes.func,
     onSave: PropTypes.func,
     text: PropTypes.string.isRequired

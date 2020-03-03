@@ -1,4 +1,5 @@
-﻿import React from "react";
+﻿import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
     IonPage,
     IonHeader,
@@ -8,16 +9,21 @@ import {
     IonList,
     IonFab,
     IonFabButton,
-    IonIcon
+    IonIcon,
+    IonButtons,
+    IonButton
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import { useHistory } from "react-router-dom";
+import { funnel } from 'ionicons/icons';
 import NoteListItem from './NoteListItem';
 import useNotes from '../hooks/useNotes';
 
 export default function NoteListPage() {
     const {notes, createNote }  = useNotes();
     const history = useHistory();
+    const [value, setValue] = useState(notes);
+    const { t } = useTranslation();
     
     const handleListItemClick = (id) => {
         history.push(`/notes/edit/${id}`);
@@ -26,10 +32,31 @@ const handleNewNoteClick = () => {
     const { id } = createNote();
     history.push(`/notes/edit/${id}`);
 };
+const handleArchiveClick = () => {
+    return (
+                            <NoteListItem
+                                key={6}
+                                id={6}
+                                text="Hello"
+                                createdAt="HHH"
+                                onClick={handleListItemClick}
+                            />
+                        );
+};
     return (
         <IonPage>
             <IonHeader>
+        <IonTitle>{t("noteListPageTitle")}</IonTitle>
                 <IonToolbar>
+                 <IonButtons slot="primary">
+                        <IonButton color="secondary" >
+                            <IonIcon slot="icon-only" 
+                                    icon={funnel} 
+                                    value={value}
+                                    onClick={() => handleArchiveClick}
+                            />
+                        </IonButton>
+                    </IonButtons>
                     <IonTitle>Note List</IonTitle>
                 </IonToolbar>
             </IonHeader>
