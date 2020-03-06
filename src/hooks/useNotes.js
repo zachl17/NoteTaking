@@ -67,11 +67,10 @@ export default function useNotes() {
             });
             saveNotes(newNotes);
         },
-        archiveNote(id, newText){
-            var isArchived = false;
+        archiveNote(id, isArchived){
             const newNotes = notes.map((note) => {
                 if (note.id === id) {
-                    isArchived = true;
+                    note.isArchived = true;
                 }
                 return note;
             });

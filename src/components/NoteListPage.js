@@ -33,15 +33,15 @@ const handleNewNoteClick = () => {
     history.push(`/notes/edit/${id}`);
 };
 const handleArchiveClick = () => {
-    return (
-                            <NoteListItem
-                                key={6}
-                                id={6}
-                                text="Hello"
-                                createdAt="HHH"
-                                onClick={handleListItemClick}
-                            />
-                        );
+         const archivedNotes = notes.map((note) => {
+                if (note.isArchieved === true) {
+                    return {
+                        ...note,
+                        text: archivedNotes
+                    };
+                }
+                return note;
+            })
 };
     return (
         <IonPage>

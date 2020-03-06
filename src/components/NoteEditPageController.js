@@ -8,7 +8,7 @@ import useNotes from '../hooks/useNotes';
 export default function NoteEditPageController() {
     const { id } = useParams();
     const history = useHistory();
-    const { notes, deleteNote, updateNote } = useNotes();
+    const { notes, deleteNote, updateNote, archiveNote } = useNotes();
     const [showAlert1, setShowAlert1] = useState(false);
 
 
@@ -31,7 +31,7 @@ export default function NoteEditPageController() {
 
     };
    const handleOnArchive = () => {
-       
+       archiveNote(id);
     };
     return( <NoteEditPage 
             onArchieve = { handleOnArchive }
