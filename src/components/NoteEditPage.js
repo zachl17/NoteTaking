@@ -54,7 +54,7 @@ export default function NoteEditPage(props) {
                             text:t("deleteText"),
                             role: "destructive",
                             icon: trash,
-                            handler: onDelete
+                            handler: () => setShowAlert(true)
                         },
                         {
                             text: t("cancelText"),
@@ -69,7 +69,6 @@ export default function NoteEditPage(props) {
                         }
                     ]}
                 />
-        <IonButton onClick={() => setShowAlert(true)} expand="block">Show Alert 1</IonButton>
          <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
@@ -82,7 +81,7 @@ export default function NoteEditPage(props) {
               handler: () => setShowActions(false)
            },
             {
-              text: 'Confirm',
+              text: t("confirmText"),
               handler: onDelete
             }
           ]}

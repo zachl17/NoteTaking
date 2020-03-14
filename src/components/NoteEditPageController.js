@@ -13,7 +13,7 @@ export default function NoteEditPageController() {
     if (!selectedNote) return null;
 
     const handleSelectedNoteSave = (newText) => {
-        if(newText.trim()){
+        if(newText.trim().length === 0){
            deleteNote(id);
            }
         else{
