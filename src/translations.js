@@ -4,7 +4,8 @@ export default {
             noteListPageTitle: "Note List",
             deleteText: "Delete",
             cancelText: "Cancel",
-            archiveText: "Archive"
+            archiveText: "Archive",
+            confirmText: "Confirm"
         },
     },
     es: {
@@ -12,7 +13,8 @@ export default {
             noteListPageTitle: "Spanish Note List",
             deleteText: "Eliminar",
             cancelText: "Cancelar",
-            archiveText: "el Archivo"
+            archiveText: "el Archivo",
+            confirmText: "Confirmar"
         }
     }
 }

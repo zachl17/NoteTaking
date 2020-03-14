@@ -22,7 +22,7 @@ import useNotes from '../hooks/useNotes';
 export default function NoteListPage() {
     const {notes, createNote }  = useNotes();
     const history = useHistory();
-    const [value, setValue] = useState(notes);
+    const [showAll, setShowAll] = useState(false);
     const { t } = useTranslation();
     
     const handleListItemClick = (id) => {
@@ -32,16 +32,16 @@ const handleNewNoteClick = () => {
     const { id } = createNote();
     history.push(`/notes/edit/${id}`);
 };
+    
+let filteredNotes;
+  if (showAll) {
+    filteredNotes = notes;
+  } else {
+    filteredNotes = notes.filter((note) => note.isArchived !== true);
+  }
+
 const handleArchiveClick = () => {
-         const archivedNotes = notes.map((note) => {
-                if (note.isArchieved === true) {
-                    return {
-                        ...note,
-                        text: archivedNotes
-                    };
-                }
-                return note;
-            })
+  setShowAll(!showAll);
 };
     return (
         <IonPage>
@@ -52,8 +52,7 @@ const handleArchiveClick = () => {
                         <IonButton color="secondary" >
                             <IonIcon slot="icon-only" 
                                     icon={funnel} 
-                                    value={value}
-                                    onClick={() => handleArchiveClick}
+                                    onClick={handleArchiveClick}
                             />
                         </IonButton>
                     </IonButtons>
@@ -63,7 +62,7 @@ const handleArchiveClick = () => {
             <IonContent>
                 <IonList lines="full">
                 {
-                    notes.map((note, index) => {
+                    filteredNotes.map((note, index) => {
                         return (
                             <NoteListItem
                                 key={note.id}

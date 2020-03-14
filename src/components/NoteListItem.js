@@ -6,7 +6,7 @@ import formatDate from "../util/formatDate";
 import formatNoteItemText from "../util/formatNoteItemText";
 
 export default function NoteListItem(props) {
-    const { createdAt, id, onClick, text, isArchived } = props;
+    const { createdAt, id, onClick, text } = props;
 
     const handleItemClick = (event) => {
         event.preventDefault();
@@ -34,7 +34,6 @@ NoteListItem.propTypes = {
     text: PropTypes.string.isRequired,
     createdAt: PropTypes.instanceOf(Date).isRequired,
     onClick: PropTypes.func,
-    isArchived: PropTypes.bool
 };
 
 

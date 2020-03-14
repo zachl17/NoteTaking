@@ -2,6 +2,7 @@
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import {
+    IonAlert,
     IonPage,
     IonHeader,
     IonToolbar,
@@ -21,6 +22,7 @@ export default function NoteEditPage(props) {
     const { onArchive } = props;
     const [value, setValue] = useState(text);
     const [showActions, setShowActions] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
     const { t } = useTranslation();
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -67,6 +69,24 @@ export default function NoteEditPage(props) {
                         }
                     ]}
                 />
+        <IonButton onClick={() => setShowAlert(true)} expand="block">Show Alert 1</IonButton>
+         <IonAlert
+          isOpen={showAlert}
+          onDidDismiss={() => setShowAlert(false)}
+          header={'Confirm Note Deletion'}
+          message={'<strong>Are you sure you want to delete this note?</strong>'}
+          buttons={[
+            {
+              text: t("cancelText"),
+              role: 'cancel',
+              handler: () => setShowActions(false)
+           },
+            {
+              text: 'Confirm',
+              handler: onDelete
+            }
+          ]}
+        />
             </IonContent>
         </IonPage>
         );
